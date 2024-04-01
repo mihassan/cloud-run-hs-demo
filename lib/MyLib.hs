@@ -1,4 +1,4 @@
-module MyLib (someFunc) where
+module MyLib (getRandomQuote) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+getRandomQuote :: IO String
+getRandomQuote = pure "It's not a bug, it's a feature."

@@ -1,8 +1,8 @@
 module Main where
 
-import qualified MyLib (someFunc)
+import MyLib (getRandomQuote)
 
 main :: IO ()
 main = do
-  putStrLn "Hello, Haskell!"
-  MyLib.someFunc
+  quote <- getRandomQuote
+  putStrLn quote
