@@ -1,8 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Main where
 
-import MyLib (getRandomQuote)
+import Quote (getRandomQuote)
+import Web.Scotty
 
 main :: IO ()
-main = do
-  quote <- getRandomQuote
-  putStrLn quote
+main = scotty 3000 $ do
+  get "/" $ do
+    quote <- liftIO getRandomQuote
+    json quote

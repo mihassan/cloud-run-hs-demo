@@ -61,7 +61,7 @@ library
     import:           warnings
 
     -- Modules exported by the library.
-    exposed-modules:  MyLib
+    exposed-modules:  Quote
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -94,6 +94,8 @@ executable CloudRunDemo
     -- Other library packages from which modules are imported.
     build-depends:
         base ^>=4.19.1.0,
+        scotty,
+        wai-extra,
         CloudRunDemo
 
     -- Directories containing source files.
