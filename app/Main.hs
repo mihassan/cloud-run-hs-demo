@@ -2,7 +2,7 @@
 
 module Main where
 
-import Quote
+import Service
 import System.Environment
 import Web.Scotty
 
@@ -11,7 +11,7 @@ main = do
   port <- maybe 8080 read <$> lookupEnv "PORT"
   scotty port $ do
     get "/" $ do
-      quote <- liftIO getRandomQuote
+      quote <- liftIO getQuote
       json quote
 
 lookupPort :: IO Int

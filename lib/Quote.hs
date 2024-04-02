@@ -1,4 +1,14 @@
-module Quote (getRandomQuote) where
+module Quote (Quote (..)) where
 
-getRandomQuote :: IO String
-getRandomQuote = pure "It's not a bug, it's a feature."
+import Data.Aeson
+import Data.Text
+import GHC.Generics
+
+data Quote = Quote
+  { author :: Text,
+    quote :: Text,
+    category :: Text
+  }
+  deriving (Show, Eq, Generic)
+
+instance ToJSON Quote
