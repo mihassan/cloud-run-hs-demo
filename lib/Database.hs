@@ -1,8 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Db (quotes) where
+module Database (getRandomQuote) where
 
 import Quote
+import System.Random
 
 quotes :: [Quote]
 quotes =
@@ -24,3 +25,8 @@ quotes =
     Quote {author = "Albert Schweitzer", quote = "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.", category = "success"},
     Quote {author = "Zig Ziglar", quote = "Success is not in what you have, but who you are.", category = "success"}
   ]
+
+getRandomQuote :: IO Quote
+getRandomQuote = do
+  index <- randomRIO (0, length quotes - 1)
+  return (quotes !! index)

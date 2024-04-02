@@ -62,9 +62,9 @@ library
 
     -- Modules exported by the library.
     exposed-modules:
-        Db,
-        Quote,
-        Service
+        Api,
+        Database,
+        Quote
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -77,7 +77,8 @@ library
         base ^>=4.19.1.0,
         aeson,
         text,
-        random
+        random,
+        scotty
 
     -- Directories containing source files.
     hs-source-dirs:   lib
