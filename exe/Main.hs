@@ -2,11 +2,20 @@
 
 module Main where
 
-import Quote (getRandomQuote)
+import Data.Maybe
+import Quote
+import System.Environment
 import Web.Scotty
 
 main :: IO ()
-main = scotty 3000 $ do
-  get "/" $ do
-    quote <- liftIO getRandomQuote
-    json quote
+main = do
+  port <- lookupPort
+  scotty port $ do
+    get "/" $ do
+      quote <- liftIO getRandomQuote
+      json quote
+
+lookupPort :: IO Int
+lookupPort = do
+  portStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+  return $ read portStr
