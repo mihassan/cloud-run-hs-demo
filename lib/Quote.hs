@@ -6,7 +6,8 @@ import Database.SQLite.Simple
 import GHC.Generics
 
 data Quote = Quote
-  { author :: Text,
+  { quote_id :: Text,
+    author :: Text,
     quote :: Text,
     category :: Text
   }
@@ -15,4 +16,4 @@ data Quote = Quote
 instance ToJSON Quote
 
 instance FromRow Quote where
-  fromRow = Quote <$> field <*> field <*> field
+  fromRow = Quote <$> field <*> field <*> field <*> field
