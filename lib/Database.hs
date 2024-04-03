@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Database (connectDb, getQuote, getRandomQuote, getRandomQuoteByCategory) where
+module Database (connectDb, getCategories, getQuote, getRandomQuote, getRandomQuoteByCategory) where
 
+import Category
 import Data.Maybe
 import Data.Text
 import Database.SQLite.Simple
@@ -9,6 +10,10 @@ import Quote
 
 connectDb :: String -> IO Connection
 connectDb path = open path
+
+getCategories :: Connection -> IO [Category]
+getCategories conn = do
+  query_ conn "SELECT category, COUNT(*) AS quoteCount FROM quotes GROUP BY 1 ORDER BY 2 DESC"
 
 getQuote :: Connection -> Text -> IO (Maybe Quote)
 getQuote conn quote_id = do

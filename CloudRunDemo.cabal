@@ -63,6 +63,7 @@ library
     -- Modules exported by the library.
     exposed-modules:
         Api,
+        Category,
         Database,
         Quote
 

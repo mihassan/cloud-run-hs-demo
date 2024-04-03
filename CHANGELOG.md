@@ -6,4 +6,5 @@
 * Use a sqlite db to store quotes.
 * Use sqllite-simple to interact with the db.
 * Return a random quote as json data.
-
+* Return a random quote from a category.
+* Return all categories.

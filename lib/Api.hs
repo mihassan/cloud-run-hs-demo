@@ -23,3 +23,6 @@ setupRoutes conn = do
     case maybeQuote of
       Just quote -> json quote
       Nothing -> throw . PathParameterNotFound $ "category = " <> category
+  get "/categories" $ do
+    categories <- liftIO $ getCategories conn
+    json categories
