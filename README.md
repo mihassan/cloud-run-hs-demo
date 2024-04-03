@@ -11,6 +11,8 @@ The API fetches a random quote and returns it as JSON.
 
 # Future Work
 - Add tests
+- Add logging
+- Add error handling
 - Support tags and categories for quotes
 - Add more information about the quote
 - Add more quotes to the database
