@@ -77,8 +77,8 @@ library
         base ^>=4.19.1.0,
         aeson,
         text,
-        random,
-        scotty
+        scotty,
+        sqlite-simple
 
     -- Directories containing source files.
     hs-source-dirs:   lib

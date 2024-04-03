@@ -2,6 +2,7 @@ module Quote (Quote (..)) where
 
 import Data.Aeson
 import Data.Text
+import Database.SQLite.Simple
 import GHC.Generics
 
 data Quote = Quote
@@ -12,3 +13,6 @@ data Quote = Quote
   deriving (Show, Eq, Generic)
 
 instance ToJSON Quote
+
+instance FromRow Quote where
+  fromRow = Quote <$> field <*> field <*> field

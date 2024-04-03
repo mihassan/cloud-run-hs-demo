@@ -24,5 +24,8 @@ RUN cabal install
 # This default value facilitates local development.
 ENV PORT 8080
 
+# The sqlite database file must be copied to the container.
+ENV DB_PATH /app/quotes.db
+
 # Run the web service on container startup.
 CMD ["CloudRunDemo"]

@@ -4,9 +4,10 @@ module Api (setupRoutes) where
 
 import Database
 import Web.Scotty
+import Database.SQLite.Simple
 
-setupRoutes :: ScottyM ()
-setupRoutes = do
+setupRoutes :: Connection -> ScottyM ()
+setupRoutes conn = do
   get "/" $ do
-    quote <- liftIO getRandomQuote
+    quote <- liftIO $ getRandomQuote conn
     json quote
