@@ -77,9 +77,10 @@ library
     build-depends:
         base ^>=4.19.1.0,
         aeson,
-        text,
+        http-types,
         scotty,
-        sqlite-simple
+        sqlite-simple,
+        text
 
     -- Directories containing source files.
     hs-source-dirs:   lib

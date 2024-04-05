@@ -12,20 +12,13 @@ connectDb :: String -> IO Connection
 connectDb path = open path
 
 getCategories :: Connection -> IO [Category]
-getCategories conn = do
-  query_ conn "SELECT category, quoteCount FROM catgories"
+getCategories conn = query_ conn "SELECT category, quoteCount FROM categories"
 
 getQuote :: Connection -> Text -> IO (Maybe Quote)
-getQuote conn quote_id = do
-  quote <- listToMaybe <$> query conn "SELECT quote_id, author, quote, category FROM quotes WHERE quote_id = ?" (Only quote_id)
-  pure quote
+getQuote conn quote_id = listToMaybe <$> query conn "SELECT quote_id, author, quote, category FROM quotes WHERE quote_id = ?" (Only quote_id)
 
-getRandomQuote :: Connection -> IO Quote
-getRandomQuote conn = do
-  [quote] <- query_ conn "SELECT quote_id, author, quote, category FROM quotes ORDER BY RANDOM() LIMIT 1"
-  pure quote
+getRandomQuote :: Connection -> IO (Maybe Quote)
+getRandomQuote conn = listToMaybe <$> query_ conn "SELECT quote_id, author, quote, category FROM quotes ORDER BY RANDOM() LIMIT 1"
 
 getRandomQuoteByCategory :: Connection -> Text -> IO (Maybe Quote)
-getRandomQuoteByCategory conn category = do
-  quote <- listToMaybe <$> query conn "SELECT quote_id, author, quote, category FROM quotes WHERE category = ? ORDER BY RANDOM() LIMIT 1" (Only category)
-  pure quote
+getRandomQuoteByCategory conn category = listToMaybe <$> query conn "SELECT quote_id, author, quote, category FROM quotes WHERE category = ? ORDER BY RANDOM() LIMIT 1" (Only category)
