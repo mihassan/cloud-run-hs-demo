@@ -19,7 +19,7 @@ setupRoutes conn = do
       Just quote -> json quote
       Nothing -> throw . PathParameterNotFound $ "quote_id = " <> quote_id
 
-  get "/quotes/category/:category/random" $ do
+  get "/categories/:category/quotes/random" $ do
     category <- pathParam "category"
     maybeQuote <- liftIO $ getRandomQuoteByCategory conn category
     case maybeQuote of
