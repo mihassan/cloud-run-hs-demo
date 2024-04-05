@@ -15,5 +15,7 @@ data Pagination = Pagination
 getPagination :: ActionM Pagination
 getPagination = do
   offset <- queryParam "offset" `catchAny` const (return 0)
-  limit <- queryParam "limit" `catchAny` const (return 10)
+  limit' <- queryParam "limit" `catchAny` const (return 10)
+  -- Set a maximum limit of 100 to prevent abuse.
+  let limit = min 100 limit'
   return Pagination {..}
