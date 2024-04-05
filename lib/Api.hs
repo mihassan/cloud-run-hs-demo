@@ -9,6 +9,8 @@ import Web.Scotty
 
 setupRoutes :: Connection -> ScottyM ()
 setupRoutes conn = do
+  get "/" $ do status status200
+
   get "/quotes/random" $ do
     maybeQuote <- liftIO $ getRandomQuote conn
     case maybeQuote of
