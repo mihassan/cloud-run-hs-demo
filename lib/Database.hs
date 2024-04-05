@@ -13,7 +13,7 @@ connectDb path = open path
 
 getCategories :: Connection -> IO [Category]
 getCategories conn = do
-  query_ conn "SELECT category, COUNT(*) AS quoteCount FROM quotes GROUP BY 1 ORDER BY 2 DESC"
+  query_ conn "SELECT category, quoteCount FROM catgories"
 
 getQuote :: Connection -> Text -> IO (Maybe Quote)
 getQuote conn quote_id = do
