@@ -10,7 +10,7 @@ import Web.Scotty
 
 setupRoutes :: Connection -> ScottyM ()
 setupRoutes conn = do
-  get "/" $ do status status200
+  get "/" $ do file "static/index.html"
 
   get "/quotes" $ do
     pagination <- getPagination
