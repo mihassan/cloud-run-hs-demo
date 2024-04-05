@@ -65,6 +65,7 @@ library
         Api,
         Category,
         Database,
+        Pagination,
         Quote
 
     -- Modules included in this library but not exported.
@@ -80,7 +81,8 @@ library
         http-types,
         scotty,
         sqlite-simple,
-        text
+        text,
+        unliftio
 
     -- Directories containing source files.
     hs-source-dirs:   lib
