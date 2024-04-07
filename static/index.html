@@ -5,13 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="script.js"></script>
     <title>Quote of the Day</title>
   </head>
-  <body>
-    <main class="container">
-      <h1>Quote of the Day</h1>
-      <p>Website construction is in progress. Please come back after few days.</p>
-      <progress/>
+  
+  <body x-data="quoteData">
+    <header>
+      <h1>Quote of the Day <span x-text="selectedCategory ? `(${selectedCategory})` : ''"></span></h1>
+    </header>
+    <main>
+      <template x-if="'quote' in loadedQuote">
+        <div>
+          <blockquote>
+            <span x-text="loadedQuote.quote"></span>
+            <footer>
+              <cite x-text=" '— ' + loadedQuote.author "></cite>
+              <a href="#" x-text="loadedQuote.category" @click="loadQuoteByCategory(loadedQuote.category)"></a>
+            </footer>
+          </blockquote>
+        </div>
+      </template>
     </main>
+    <footer style="position:absolute;bottom:0">
+      <button @click="refreshQuote()">Another Quote <span x-text="selectedCategory ? `about ${selectedCategory}` : ''"></span></button>
+      <button x-show="selectedCategory != ''" @click="loadQuote()">Another Quote from any Category</button>
+    </footer>
   </body>
 </html>

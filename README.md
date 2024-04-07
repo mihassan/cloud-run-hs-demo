@@ -9,6 +9,8 @@ The API fetches a random quote from a SQLite database and returns it as JSON.
 - `scotty` for web framework
 - `wai` for web application interface
 - `sqlite-simple` for database
+- Alpinejs for reactive frontend
+- PicoCSS for minimal CSS
 
 # Future Work
 - Add tests
