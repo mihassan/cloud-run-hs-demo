@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS "quotes" (
+  quote_id UUID PRIMARY KEY DEFAULT (uuid()),
+  author TEXT,
+  quote TEXT NOT NULL CHECK (quote <> ''),
+  category TEXT
+);
+
+CREATE TABLE categories (
+  category TEXT PRIMARY KEY NOT NULL CHECK (category <> ''),
+  quoteCount INT CHECK (quoteCount > 0)
+);
+
+-- Populate categories table with unique categories from quotes table.
+-- INSERT INTO caregories (category, quoteCount) SELECT category, COUNT(*) FROM quotes GROUP BY category;
+
+CREATE INDEX idx_quotes_category on quotes (category);

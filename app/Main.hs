@@ -12,7 +12,7 @@ import Web.Scotty
 main :: IO ()
 main = do
   port <- maybe 8080 read <$> lookupEnv "PORT"
-  db_path <- fromMaybe "quotes.db" <$> lookupEnv "DB_PATH"
+  db_path <- fromMaybe "db/quotes.db" <$> lookupEnv "DB_PATH"
   conn <- connectDb db_path
   scotty port $ do
     middleware logStdoutDev

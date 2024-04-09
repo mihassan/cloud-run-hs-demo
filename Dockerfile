@@ -25,7 +25,7 @@ RUN cabal install
 ENV PORT 8080
 
 # The sqlite database file must be copied to the container.
-ENV DB_PATH /app/quotes.db
+ENV DB_PATH /app/db/quotes.db
 
 # Run the web service on container startup.
 CMD ["CloudRunDemo"]
