@@ -12,24 +12,25 @@
   
   <body x-data="quoteData">
     <header>
-      <h1>Quote of the Day <span x-text="selectedCategory ? `(${selectedCategory})` : ''"></span></h1>
+      <h1>Quote of the Day</h1>
     </header>
     <main>
-      <template x-if="'quote' in loadedQuote">
+      <template x-if="isLoaded">
         <div>
           <blockquote>
-            <span x-text="loadedQuote.quote"></span>
+            <span x-text="quote"></span>
             <footer>
-              <cite x-text=" '— ' + loadedQuote.author "></cite>
-              <a href="#" x-text="loadedQuote.category" @click="loadQuoteByCategory(loadedQuote.category)"></a>
+              <cite x-text=" '— ' + author "></cite>
             </footer>
           </blockquote>
+          <hr/>
+          Category: <em x-text="category"></em>
+          <footer style="position:absolute; bottom:0;">
+            <button @click="loadQuote()">New quote</button>
+            <button @click="loadQuoteInSameCategory()">New quote on <em x-text="category"></em></button>
+          </footer>
         </div>
       </template>
     </main>
-    <footer style="position:absolute;bottom:0">
-      <button @click="refreshQuote()">Another Quote <span x-text="selectedCategory ? `about ${selectedCategory}` : ''"></span></button>
-      <button x-show="selectedCategory != ''" @click="loadQuote()">Another Quote from any Category</button>
-    </footer>
   </body>
 </html>

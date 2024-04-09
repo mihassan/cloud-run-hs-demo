@@ -1,32 +1,29 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('quoteData', () => ({
-    selectedCategory: '',
-    loadedQuote: {},
+    isLoaded: false,
+
+    quote: '',
+    author: '',
+    category: '',
+
+    populateQuote(data) {
+      console.log(data)
+      this.quote = data.quote
+      this.author = data.author
+      this.category = data.category
+      this.isLoaded = true
+    },
 
     loadQuote() {
       fetch('./quotes/random')
         .then(response => response.json())
-        .then(data => {
-          this.selectedCategory = ''
-          this.loadedQuote = data
-        })
+        .then(data => this.populateQuote(data))
     },
 
-    loadQuoteByCategory(category) {
-      fetch(`./categories/${category}/quotes/random`)
+    loadQuoteInSameCategory() {
+      fetch(`./categories/${this.category}/quotes/random`)
         .then(response => response.json())
-        .then(data => {
-          this.selectedCategory = category
-          this.loadedQuote = data
-        })
-    },
-
-    refreshQuote() {
-      if (this.selectedCategory) {
-        this.loadQuoteByCategory(this.selectedCategory)
-      } else {
-        this.loadQuote()
-      }
+        .then(data => this.populateQuote(data))
     },
 
     init() {
