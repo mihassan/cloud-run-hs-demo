@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 
-FROM haskell:9.8.2-slim-buster
+# Using docker multistage build.
+FROM haskell:9.8.2-slim-buster AS build
 
 # Copy local code to the container image.
 WORKDIR /app
@@ -19,6 +20,15 @@ COPY . .
 
 # Add and Install Application Code
 RUN cabal install
+
+# Build final image by copying the executable, db, and static files.
+FROM debian:buster-slim
+
+WORKDIR /app
+
+COPY . .
+
+COPY --from=build /root/.local/bin/CloudRunDemo /usr/local/bin
 
 # Service must listen to $PORT environment variable.
 # This default value facilitates local development.
