@@ -5,12 +5,14 @@ CREATE TABLE IF NOT EXISTS "quotes" (
   category TEXT
 );
 
-CREATE TABLE categories (
+DROP TABLE IF EXISTS categories;
+
+CREATE TABLE IF NOT EXISTS categories (
   category TEXT PRIMARY KEY NOT NULL CHECK (category <> ''),
   quoteCount INT CHECK (quoteCount > 0)
 );
 
 -- Populate categories table with unique categories from quotes table.
--- INSERT INTO caregories (category, quoteCount) SELECT category, COUNT(*) FROM quotes GROUP BY category;
+INSERT INTO categories (category, quoteCount) SELECT category, COUNT(*) FROM quotes GROUP BY category;
 
-CREATE INDEX idx_quotes_category on quotes (category);
+CREATE INDEX IF NOT EXISTS idx_quotes_category on quotes (category);
